@@ -2,7 +2,7 @@
 
 import { Movie } from "@/@types/movies.type";
 import { moviesStore } from "@/store/movies.store";
-import { Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -30,7 +30,9 @@ export const MoviesContent = () => {
   if (movies.length > 0 && !loading) {
     return (
       <div className="flex flex-col gap-3">
-        <p className="sm:text-xl">Resultados para: {lastQuery}</p>
+        <p className="sm:text-xl text-start sm:text-center">
+          Resultados para: {lastQuery}
+        </p>
 
         <div className="hidden sm:flex flex-wrap justify-center items-center gap-3 px-5">
           {realMovies.map((movie) => (
@@ -40,9 +42,9 @@ export const MoviesContent = () => {
 
         <div className="w-full sm:hidden">
           <Swiper
+            modules={[Autoplay]}
+            autoplay
             slidesPerView={"auto"}
-            navigation
-            modules={[Navigation]}
             loop={true}
             className="max-w-[240px] sm:max-w-[400px] md:max-w-[700px] lg:max-w-[930px] xl:max-w-[1200px] h-full"
           >

@@ -6,10 +6,11 @@ import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { getMoviesByPreference } from "../actions/get-movies-by-preference";
+import { SendHorizontal } from "lucide-react";
 
 export const PreferenceText = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const { loading, movies } = useSnapshot(moviesStore);
+  const { loading } = useSnapshot(moviesStore);
 
   useEffect(() => {
     if (textAreaRef.current) {
@@ -22,9 +23,15 @@ export const PreferenceText = () => {
   };
 
   const onSubmit = async (formData: FormData) => {
+    const userPreferences = formData.get("userPreferences") as string;
+
+    if (!userPreferences) {
+      return;
+    }
+
     moviesStore.loading = true;
     const movies = await getMoviesByPreference(formData);
-    moviesStore.lastQuery = formData.get("userPreferences") as string;
+    moviesStore.lastQuery = userPreferences;
     moviesStore.movies = movies;
     moviesStore.loading = false;
   };
@@ -34,13 +41,7 @@ export const PreferenceText = () => {
       action={onSubmit}
       className="w-full sm:w-auto sm:min-w-[600px] md:min-w-[700px] flex flex-col gap-3"
     >
-      <motion.span
-        initial={{ height: movies.length === 0 ? 140 : 100 }}
-        animate={{ height: movies.length === 0 ? 140 : 100 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-        onClick={focusTextArea}
-        className={"bg-card border-2 rounded-lg p-3"}
-      >
+      <motion.div className="bg-card border-2 rounded-lg p-3 flex flex-col">
         <Textarea
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
@@ -51,11 +52,15 @@ export const PreferenceText = () => {
           disabled={loading}
           name="userPreferences"
           ref={textAreaRef}
-          className={`w-full h-full min-h-0
-          border-0 ring-0 outline-none focus-visible:ring-0 focus-visible:border-0 resize-none p-0 disabled:animate-pulse`}
+          className={`flex-grow border-0 ring-0 outline-none focus-visible:ring-0 focus-visible:border-0 resize-none p-0 disabled:animate-pulse`}
           placeholder="Descreva o que você quer assistir"
         />
-      </motion.span>
+        <div className="flex justify-end gap-2 mt-2">
+          <button type="submit">
+            <SendHorizontal />
+          </button>
+        </div>
+      </motion.div>
     </form>
   );
 };
