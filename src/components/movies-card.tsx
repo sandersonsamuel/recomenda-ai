@@ -24,7 +24,7 @@ export const MoviesCard = ({ movie }: Props) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut" }}
           title={movie.title}
-          className="w-[200px] h-[245px] sm:w-[170px] p-2 bg-card rounded-md border-2 hover:scale-105 transition-transform"
+          className="w-[200px] h-[290.4px] sm:h-[245.5px] sm:w-[170px] p-2 bg-card rounded-md border-2 hover:scale-105 transition-transform"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
         />
