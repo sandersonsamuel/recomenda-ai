@@ -43,7 +43,10 @@ export const MoviesContent = () => {
         <div className="w-full sm:hidden">
           <Swiper
             modules={[Autoplay]}
-            autoplay
+            autoplay={{
+              disableOnInteraction: true,
+              pauseOnMouseEnter: true,
+            }}
             slidesPerView={"auto"}
             loop={true}
             className="max-w-[240px] sm:max-w-[400px] md:max-w-[700px] lg:max-w-[930px] xl:max-w-[1200px] h-full"
