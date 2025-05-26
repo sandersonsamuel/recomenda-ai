@@ -16,7 +16,7 @@ export const MoviesContent = () => {
 
   if (movies.length === 0 && !loading) {
     return (
-      <h3 className="text-justify sm:text-center text-sm sm:text-md md:text-xl max-w-4xl sm:mx-3 md:mx-0">
+      <h3 className="text-gray-200 text-justify sm:text-center text-sm sm:text-md md:text-xl max-w-4xl sm:mx-3 md:mx-0">
         Descubra seu próximo filme favorito! Diga-nos o que você gosta e
         ajudaremos a encontrar as melhores sugestões para você.
       </h3>
@@ -30,7 +30,7 @@ export const MoviesContent = () => {
   if (movies.length > 0 && !loading) {
     return (
       <div className="flex flex-col gap-3">
-        <p className="sm:text-xl text-start sm:text-center">
+        <p className="sm:text-xl text-start sm:text-center text-gray-200">
           Resultados para: {lastQuery}
         </p>
 
