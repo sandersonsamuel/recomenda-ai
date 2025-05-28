@@ -8,7 +8,7 @@ import { useSnapshot } from "valtio";
 import { getMoviesByPreference } from "../actions/get-movies-by-preference";
 import { SendHorizontal } from "lucide-react";
 
-export const PreferenceText = () => {
+export const PreferenceDisplay = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const { loading } = useSnapshot(moviesStore);
 

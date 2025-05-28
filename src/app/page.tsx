@@ -1,5 +1,5 @@
-import { MoviesContent } from "@/components/movies-content";
-import { PreferenceText } from "../components/preference-text";
+import { MovieList } from "@/components/movie-list";
+import { PreferenceDisplay } from "../components/preference-display";
 
 export default function Home() {
   return (
@@ -9,8 +9,8 @@ export default function Home() {
           Recomenda<b className="text-primary">AI</b>
         </h3>
 
-        <MoviesContent />
-        <PreferenceText />
+        <MovieList />
+        <PreferenceDisplay />
       </div>
     </div>
   );

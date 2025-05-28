@@ -15,7 +15,7 @@ type Props = {
   movie: Movie;
 };
 
-export const MoviesCard = ({ movie }: Props) => {
+export const MovieCard = ({ movie }: Props) => {
   return (
     <Dialog key={movie.id}>
       <DialogTrigger>

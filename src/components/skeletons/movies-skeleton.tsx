@@ -3,7 +3,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "motion/react";
 
-export const MoviesContentSkeleton = () => {
+export const MovieSkeleton = () => {
   return (
     <>
       {/* Movies Skeleton desktop */}

@@ -7,10 +7,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSnapshot } from "valtio";
-import { MoviesCard } from "./movies-card";
-import { MoviesContentSkeleton } from "./skeletons/movies-skeleton";
+import { MovieCard } from "./movie-card";
+import { MovieSkeleton } from "./skeletons/movies-skeleton";
 
-export const MoviesContent = () => {
+export const MovieList = () => {
   const { movies, lastQuery, loading } = useSnapshot(moviesStore);
   const realMovies = movies.filter((movie) => !!movie);
 
@@ -24,7 +24,7 @@ export const MoviesContent = () => {
   }
 
   if (loading) {
-    return <MoviesContentSkeleton />;
+    return <MovieSkeleton />;
   }
 
   if (movies.length > 0 && !loading) {
@@ -36,7 +36,7 @@ export const MoviesContent = () => {
 
         <div className="hidden sm:flex flex-wrap justify-center items-center gap-3 px-5">
           {realMovies.map((movie) => (
-            <MoviesCard key={movie.id} movie={movie as Movie} />
+            <MovieCard key={movie.id} movie={movie as Movie} />
           ))}
         </div>
 
@@ -56,7 +56,7 @@ export const MoviesContent = () => {
                 key={movie.id}
                 className="flex justify-center items-center h-full"
               >
-                <MoviesCard key={movie.id} movie={movie as Movie} />
+                <MovieCard key={movie.id} movie={movie as Movie} />
               </SwiperSlide>
             ))}
           </Swiper>

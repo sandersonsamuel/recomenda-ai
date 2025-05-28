@@ -1,7 +1,6 @@
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import "@/app/globals.css";
-import { QueryProvider } from "../components/providers/query-provider";
 
 export const metadata: Metadata = {
   title: "RecomendaAI - Descubra Filmes com Inteligência Artificial",
@@ -72,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${font.className} antialiased dark max-w-full`}>
-        <QueryProvider>{children}</QueryProvider>
+        {children}
       </body>
     </html>
   );
