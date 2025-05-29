@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "RecomendaAI - Descubra Filmes com Inteligência Artificial",
@@ -72,6 +73,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${font.className} antialiased dark max-w-full`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

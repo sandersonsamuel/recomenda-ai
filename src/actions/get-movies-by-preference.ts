@@ -8,7 +8,7 @@ export const getMoviesByPreference = async (formData: FormData) => {
 
   const movieRecommendations = await getMovieRecommendations(userPreferences);
 
-  if (movieRecommendations) {
+  if (movieRecommendations && movieRecommendations?.length > 0) {
     const movies = await Promise.all(
       movieRecommendations.map(async (query) => {
         return await searchMovie(query);

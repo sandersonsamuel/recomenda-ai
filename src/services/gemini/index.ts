@@ -11,13 +11,18 @@ export async function getMovieRecommendations(userPreferences: string) {
   Substitua espaços por + no campo query.
   Remova acentos e caracteres especiais dos nomes dos filmes apenas na parte do query.
   Limite a saída a no máximo 5 filmes.
-  Retorne apenas as strings formatadas, separadas por virgula, sem explicações adicionais.`;
+  Retorne apenas as strings formatadas, separadas por virgula, sem explicações adicionais.
+  Se a pergunta não for possível ser respondida, retorne uma string vazia apenas string vazia, sem explicação. exemplo:""`;
 
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: prompt,
     });
+
+    if (response.text === ""){
+      return [];
+    }
 
     if (response && response.text) {
       return response.text.split(",");
