@@ -3,9 +3,7 @@
 import { searchMovie } from "@/api/queries/search-movie";
 import { getMovieRecommendations } from "@/services/gemini";
 
-export const getMoviesByPreference = async (formData: FormData) => {
-  const userPreferences = formData.get("userPreferences") as string;
-
+export const getMoviesByPreference = async (userPreferences: string) => {
   const movieRecommendations = await getMovieRecommendations(userPreferences);
 
   if (movieRecommendations && movieRecommendations?.length > 0) {
@@ -15,14 +13,7 @@ export const getMoviesByPreference = async (formData: FormData) => {
       })
     );
 
-    return movies
-      .map((movie) => {
-        if (movie && movie?.results?.length > 0) {
-          return movie.results[0];
-        }
-        return null;
-      })
-      .filter(Boolean);
+    return movies.filter((movie) => !!movie);
   }
 
   return [];

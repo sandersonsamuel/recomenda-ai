@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useSnapshot } from "valtio";
 import { MovieCard } from "./movie-card";
 import { MovieSkeleton } from "./skeletons/movies-skeleton";
-import toast from "react-hot-toast";
 
 export const MovieList = () => {
   const { movies, lastQuery, loading } = useSnapshot(moviesStore);
@@ -26,10 +25,6 @@ export const MovieList = () => {
 
   if (loading) {
     return <MovieSkeleton />;
-  }
-
-  if (lastQuery && movies.length === 0 && !loading) {
-    toast.error("Erro ao buscar os filmes. Tente novamente no outro prompt.");
   }
 
   if (movies.length > 0 && !loading) {

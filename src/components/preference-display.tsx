@@ -30,7 +30,7 @@ export const PreferenceDisplay = () => {
     }
 
     moviesStore.loading = true;
-    const movies = await getMoviesByPreference(formData);
+    const movies = await getMoviesByPreference(userPreferences);
     moviesStore.lastQuery = userPreferences;
     moviesStore.movies = movies;
     moviesStore.loading = false;
