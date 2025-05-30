@@ -1,3 +1,6 @@
+"use server"
+
+import { moviesStore } from "@/store/movies.store";
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_KEY });
@@ -36,6 +39,8 @@ export async function getMovieRecommendations(userPreferences: string) {
     });
 
     if (response.text === "") {
+      moviesStore.error =
+        "Nenhuma recomendação encontrada. Altere suas preferências, ou tente novamente mais tarde.";
       return [];
     }
 

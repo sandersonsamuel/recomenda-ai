@@ -2,17 +2,24 @@
 
 import { Movie } from "@/@types/movies.type";
 import { moviesStore } from "@/store/movies.store";
-import { Autoplay } from "swiper/modules";
+import toast from "react-hot-toast";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSnapshot } from "valtio";
 import { MovieCard } from "./movie-card";
 import { MovieSkeleton } from "./skeletons/movies-skeleton";
+import { useEffect } from "react";
 
 export const MovieList = () => {
-  const { movies, lastQuery, loading } = useSnapshot(moviesStore);
-  const realMovies = movies.filter((movie) => !!movie);
+  const { movies, lastQuery, loading, error } = useSnapshot(moviesStore);
+
+  useEffect(() => {
+    if (error && lastQuery && !loading && movies.length === 0) {
+      toast.error(error);
+    }
+  }, [error, lastQuery, loading, movies.length]);
 
   if (movies.length === 0 && !loading) {
     return (
@@ -35,8 +42,8 @@ export const MovieList = () => {
         </p>
 
         <div className="hidden sm:flex flex-wrap justify-center items-center gap-3 px-5">
-          {realMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie as Movie} />
+          {movies.map((movie: Movie) => (
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
 
@@ -51,12 +58,12 @@ export const MovieList = () => {
             loop={true}
             className="max-w-[240px] sm:max-w-[400px] md:max-w-[700px] lg:max-w-[930px] xl:max-w-[1200px] h-full"
           >
-            {realMovies.map((movie) => (
+            {movies.map((movie: Movie) => (
               <SwiperSlide
                 key={movie.id}
                 className="flex justify-center items-center h-full"
               >
-                <MovieCard key={movie.id} movie={movie as Movie} />
+                <MovieCard key={movie.id} movie={movie} />
               </SwiperSlide>
             ))}
           </Swiper>

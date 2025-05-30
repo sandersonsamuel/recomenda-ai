@@ -12,7 +12,6 @@ export const getMoviesByPreference = async (userPreferences: string) => {
         return await searchMovie(query);
       })
     );
-
     return movies.filter((movie) => !!movie);
   }
 

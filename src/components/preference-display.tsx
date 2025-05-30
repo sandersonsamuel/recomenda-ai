@@ -31,6 +31,9 @@ export const PreferenceDisplay = () => {
 
     moviesStore.loading = true;
     const movies = await getMoviesByPreference(userPreferences);
+    if (movies.length === 0)
+      moviesStore.error =
+        "Nenhum filme encontrado. Mude suas preferências, ou tente novamente mais tarde.";
     moviesStore.lastQuery = userPreferences;
     moviesStore.movies = movies;
     moviesStore.loading = false;
