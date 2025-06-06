@@ -74,10 +74,10 @@ export const MovieList = () => {
           </Swiper>
 
           {/* btn personalizado pro swiper*/}
-          <button className="swiper-button-prev-custom absolute left-[-33] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
+          <button className="swiper-button-prev-custom absolute left-[-2rem] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
             <ChevronLeft size={24} />
           </button>
-          <button className="swiper-button-next-custom absolute right-[-33] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
+          <button className="swiper-button-next-custom absolute right-[-2rem] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
             <ChevronRight size={24} />
           </button>
         </div>
