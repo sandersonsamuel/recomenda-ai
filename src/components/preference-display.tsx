@@ -2,11 +2,11 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { moviesStore } from "@/store/movies.store";
+import { SendHorizontal } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { getMoviesByPreference } from "../actions/get-movies-by-preference";
-import { SendHorizontal } from "lucide-react";
 
 export const PreferenceDisplay = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -30,13 +30,19 @@ export const PreferenceDisplay = () => {
     }
 
     moviesStore.loading = true;
-    const movies = await getMoviesByPreference(userPreferences);
-    if (movies.length === 0)
-      moviesStore.error =
-        "Nenhum filme encontrado. Mude suas preferências, ou tente novamente mais tarde.";
-    moviesStore.lastQuery = userPreferences;
-    moviesStore.movies = movies;
-    moviesStore.loading = false;
+    const { data, error } = await getMoviesByPreference(userPreferences);
+
+    if (error) {
+      moviesStore.error = error;
+      moviesStore.loading = false;
+      return;
+    }
+
+    if (data.length > 0) {
+      moviesStore.lastQuery = userPreferences;
+      moviesStore.movies = data;
+      moviesStore.loading = false;
+    }
   };
 
   return (
@@ -59,8 +65,12 @@ export const PreferenceDisplay = () => {
           placeholder="Descreva o que você quer assistir"
         />
         <div className="flex justify-end gap-2 mt-2">
-          <button type="submit">
-            <SendHorizontal />
+          <button
+            type="submit"
+            disabled={loading}
+            className="disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <SendHorizontal className="text-secondary-foreground" />
           </button>
         </div>
       </motion.div>

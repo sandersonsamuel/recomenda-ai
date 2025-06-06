@@ -66,4 +66,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #c90000 !important; /* Exemplo: Cor vermelha para as setas */
+    /* Você pode adicionar mais estilos como font-size, etc. */
+  }
 }

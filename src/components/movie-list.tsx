@@ -2,15 +2,16 @@
 
 import { Movie } from "@/@types/movies.type";
 import { moviesStore } from "@/store/movies.store";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSnapshot } from "valtio";
 import { MovieCard } from "./movie-card";
 import { MovieSkeleton } from "./skeletons/movies-skeleton";
-import { useEffect } from "react";
 
 export const MovieList = () => {
   const { movies, lastQuery, loading, error } = useSnapshot(moviesStore);
@@ -38,7 +39,7 @@ export const MovieList = () => {
     return (
       <div className="flex flex-col gap-3">
         <p className="sm:text-xl text-start sm:text-center text-gray-200">
-          Resultados para: {lastQuery}
+          {movies.length} resultados para: "{lastQuery}"
         </p>
 
         <div className="hidden sm:flex flex-wrap justify-center items-center gap-3 px-5">
@@ -47,9 +48,13 @@ export const MovieList = () => {
           ))}
         </div>
 
-        <div className="w-full sm:hidden">
+        <div className="w-full sm:hidden relative">
           <Swiper
-            modules={[Autoplay]}
+            modules={[Autoplay, Navigation]}
+            navigation={{
+              nextEl: ".swiper-button-next-custom",
+              prevEl: ".swiper-button-prev-custom",
+            }}
             autoplay={{
               disableOnInteraction: true,
               pauseOnMouseEnter: true,
@@ -67,6 +72,14 @@ export const MovieList = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* btn personalizado pro swiper*/}
+          <button className="swiper-button-prev-custom absolute left-[-33] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
+            <ChevronLeft size={24} />
+          </button>
+          <button className="swiper-button-next-custom absolute right-[-33] top-1/2 -translate-y-1/2 z-10 text-primary p-2 bg-black/50 rounded-full">
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
     );
